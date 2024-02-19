@@ -6,9 +6,13 @@ Tic-tac-toe, also known as noughts and crosses or Xs and Os, is a classic game t
 
 ## Description
 
-In this multi-player version of Tic-tac-toe, players take turns marking empty cells with their chosen symbols. Each player can select their own unique character as a symbol. The objective remains the same: to form a horizontal, vertical, or diagonal line of three of your symbols before your opponent does.
+In this multi-player version of Tic-tac-toe, 
+players take turns marking empty cells with their chosen symbols.
+Each player can select their own unique character as a symbol. 
+The objective remains the same: to form a horizontal, vertical, or diagonal line of three of your symbols before your opponent does.
 
-Notably, in this version, there's an additional winning condition—forming a line on all four sides of the 3x3 grid, providing players with an alternative strategy to secure victory.
+Notably, in this version, there's an additional winning 
+condition—forming a line on all four sides of the NXN grid, providing players with an alternative strategy to secure victory.
 
 ## Features
 
