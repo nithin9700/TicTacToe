@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import service.WinningStrategy;
 
 import java.util.*;
 
@@ -19,7 +20,7 @@ public class GameController {
         return null;
     }
 
-    public GameStatus getGameStatus(Game game){
+    public GAMESTATUS getGameStatus(Game game){
         return null;
     }
 

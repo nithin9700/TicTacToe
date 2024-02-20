@@ -5,10 +5,20 @@ public class Player {
     private int id;
     private char symbol;
     private  String name;
+
+    private PLAYERTYPE playertype;
     public Player(int id, String name, char symbol) {
         this.id = id;
         this.name = name;
         this.symbol = symbol;
+    }
+
+    public PLAYERTYPE getPlayertype() {
+        return playertype;
+    }
+
+    public void setPlayertype(PLAYERTYPE playertype) {
+        this.playertype = playertype;
     }
 
     public int getId() {
