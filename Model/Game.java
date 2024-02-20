@@ -117,9 +117,9 @@ public class Game {
 
         public Builder setCurrentPlayer(Player currentPlayer) {
             this.currentPlayer = currentPlayer;
+            playerList.add(currentPlayer);
             return this;
         }
-
         public List<Player> getPlayerList() {
             return playerList;
         }

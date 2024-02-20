@@ -13,11 +13,12 @@ public class Player {
         this.symbol = symbol;
     }
 
+
     public PLAYERTYPE getPlayertype() {
         return playertype;
     }
 
-    public void setPlayertype(PLAYERTYPE playertype) {
+    public void setPlayerType(PLAYERTYPE playertype) {
         this.playertype = playertype;
     }
 
