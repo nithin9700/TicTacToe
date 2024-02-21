@@ -1,8 +1,10 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import Exception.*;
 import service.WinningStrategy;
 
@@ -24,9 +26,6 @@ public class Game {
         this.makeMove = new ArrayList<>();
         this.GameStatus = GAMESTATUS.IN_PROGRESS;
         this.boardList = new ArrayList<>();
-    }
-    public Builder builder(){
-        return new Builder();
     }
     public GAMESTATUS getGameStatus() {
         return GameStatus;
@@ -91,6 +90,11 @@ public class Game {
         this.winningStrategy = winningStrategy;
     }
 
+    public static Builder builder(){
+        return new Builder();
+    }
+
+
 
     public static class Builder{
         private int dimension;
@@ -99,8 +103,6 @@ public class Game {
         private List<Player> playerList;
         private Board currentBoard;
         private List<Move> makeMove;
-
-
 
         public int getDimension() {
             return dimension;
@@ -138,15 +140,6 @@ public class Game {
             return this;
         }
 
-        public List<Move> getMakeMove() {
-            return makeMove;
-        }
-
-        public Builder setMakeMove(List<Move> makeMove) {
-            this.makeMove = makeMove;
-            return this;
-        }
-
         public WinningStrategy getWinningStrategy() {
             return winningStrategy;
         }
@@ -157,19 +150,16 @@ public class Game {
         }
 
         private void validateBotCount(){
-            int botCount = 0;
-            for (Player player : playerList) {
-                if(player.getPlayertype().equals(PLAYERTYPE.BOT)) botCount++;
-            }
+            int botCount = (int)playerList.stream().filter(player -> player.getPlayertype().equals(PLAYERTYPE.BOT)).count();
             if(botCount > 1 || botCount < 0){
                 throw new InvalidPlayerException("at least player need to board size - 2 or ");
             }
         }
         private void validateSymbol(){
-            HashSet<Character> set = new HashSet<>();
-            for(Player player : playerList){
-                set.add(player.getSymbol());
-            }
+            Set<Character> set = playerList.stream()
+                    .map(Player::getSymbol)
+                    .collect(Collectors.toSet());
+
             if(set.size() != playerList.size()){
                 throw new InvalidSymbolException("Some players symbol are matching");
             }
@@ -186,9 +176,27 @@ public class Game {
             validateSymbol();
             validateNoOfPlayer();
         }
-
         public Game build(){
             return new Game(playerList, new Board(dimension), winningStrategy);
+        }
+
+        public List<Move> getMakeMove() {
+            return makeMove;
+        }
+
+        public Builder setMakeMove(List<Move> makeMove) {
+            this.makeMove = makeMove;
+            return this;
+        }
+
+
+    }
+    public Board undoStep(){
+        return null;
+    }
+    public void replayGame() {
+        for (Board board : boardList) {
+            System.out.println(board);
         }
     }
 }
