@@ -20,7 +20,7 @@ public class GameController {
         return null;
     }
 
-    public GAMESTATUS getGameStatus(Game game){
+    public GameStatus getGameStatus(Game game){
         return game.getGameStatus();
     }
 

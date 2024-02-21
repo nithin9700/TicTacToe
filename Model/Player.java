@@ -8,9 +8,9 @@ public class Player {
     private char symbol;
     private  String name;
 
-    private PLAYERTYPE playertype;
+    private PlayerType playertype;
     public Player(){}
-    public Player(int id, String name, char symbol, PLAYERTYPE playertype) {
+    public Player(int id, String name, char symbol, PlayerType playertype) {
         this.playertype = playertype;
         this.id = id;
         this.name = name;
@@ -24,7 +24,7 @@ public class Player {
         System.out.println("Enter the Col");
         int col = sc.nextInt();
 
-        if(board.getMatrix().get(row).get(col).equals(CELLTYPE.FILLED)){
+        if(board.getMatrix().get(row).get(col).equals(CellType.FILLED)){
             throw new InvalidMoveException("you cannot place you symbol which is filled by other player");
         }
 
@@ -33,16 +33,16 @@ public class Player {
         }
 
         Cell playedMoveCell = board.getMatrix().get(row).get(col);
-        playedMoveCell.setCellType(CELLTYPE.FILLED);
+        playedMoveCell.setCellType(CellType.FILLED);
         playedMoveCell.setPlayer(this);
         return new Move(playedMoveCell, this);
     }
 
-    public PLAYERTYPE getPlayertype() {
+    public PlayerType getPlayertype() {
         return playertype;
     }
 
-    public void setPlayerType(PLAYERTYPE playertype) {
+    public void setPlayerType(PlayerType playertype) {
         this.playertype = playertype;
     }
 
