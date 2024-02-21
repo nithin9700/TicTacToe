@@ -9,7 +9,7 @@ import Exception.*;
 import service.WinningStrategy;
 
 public class Game {
-    private GAMESTATUS GameStatus;
+    private Model.GameStatus GameStatus;
     private int dimension;
     private Player currentPlayer;
     private List<Player> playerList;
@@ -24,10 +24,10 @@ public class Game {
         this.currentBoard = currentBoard;
         this.winningStrategy = winningStrategy;
         this.makeMove = new ArrayList<>();
-        this.GameStatus = GAMESTATUS.IN_PROGRESS;
+        this.GameStatus = Model.GameStatus.IN_PROGRESS;
         this.boardList = new ArrayList<>();
     }
-    public GAMESTATUS getGameStatus() {
+    public Model.GameStatus getGameStatus() {
         return GameStatus;
     }
 
@@ -39,7 +39,7 @@ public class Game {
         this.boardList = boardList;
     }
 
-    public void setGameStatus(GAMESTATUS gameStatus) {
+    public void setGameStatus(Model.GameStatus gameStatus) {
         GameStatus = gameStatus;
     }
     public int getDimension() {
@@ -150,7 +150,7 @@ public class Game {
         }
 
         private void validateBotCount(){
-            int botCount = (int)playerList.stream().filter(player -> player.getPlayertype().equals(PLAYERTYPE.BOT)).count();
+            int botCount = (int)playerList.stream().filter(player -> player.getPlayertype().equals(PlayerType.BOT)).count();
             if(botCount > 1 || botCount < 0){
                 throw new InvalidPlayerException("at least player need to board size - 2 or ");
             }

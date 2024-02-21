@@ -1,14 +1,14 @@
 package service;
 
-import Model.BOTDIFFICULTYLEVEL;
+import Model.BotDifficultyLevel;
 
 public class BotDifficultLevelStrategyFactoryUI {
-    public static BotDifficultLevelStrategy pickStrategy(BOTDIFFICULTYLEVEL botdifficultylevel){
-        if (BOTDIFFICULTYLEVEL.EASY.equals(botdifficultylevel)) {
+    public static BotDifficultLevelStrategy pickStrategy(BotDifficultyLevel botdifficultylevel){
+        if (BotDifficultyLevel.EASY.equals(botdifficultylevel)) {
             new EasyBotDifficultLevelStrategy();
-        } else if (BOTDIFFICULTYLEVEL.MEDIUM.equals(botdifficultylevel)) {
+        } else if (BotDifficultyLevel.MEDIUM.equals(botdifficultylevel)) {
             new MediumBotDifficultLevelStrategy();
-        } else if (BOTDIFFICULTYLEVEL.HARD.equals(botdifficultylevel)) {
+        } else if (BotDifficultyLevel.HARD.equals(botdifficultylevel)) {
             new HardBotDifficultLevelStrategy();
         }
         return null;

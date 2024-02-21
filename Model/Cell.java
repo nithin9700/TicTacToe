@@ -1,17 +1,15 @@
 package Model;
 
-import java.util.PrimitiveIterator;
-
 public class Cell {
     private int i;
     private int j;
-    private CELLTYPE cellType;
+    private CellType cellType;
     private Player player;
 
     public Cell(int i, int j){
         this.i = i;
         this.j = j;
-        this.cellType = CELLTYPE.EMPTY;
+        this.cellType = CellType.EMPTY;
         this.player = null;
     }
     public void displayCell(){
@@ -41,11 +39,11 @@ public class Cell {
         this.j = j;
     }
 
-    public CELLTYPE getCellType() {
+    public CellType getCellType() {
         return cellType;
     }
 
-    public void setCellType(CELLTYPE cellType) {
+    public void setCellType(CellType cellType) {
         this.cellType = cellType;
     }
 
