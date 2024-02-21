@@ -1,7 +1,7 @@
 package Model;
 import java.util.*;
 public class Board {
-    List<List<Cell>> matrix;
+    private List<List<Cell>> matrix;
     private int dimension;
     public Board (int dimension){
         this.dimension= dimension;
@@ -11,6 +11,15 @@ public class Board {
             for (int j = 0; j < dimension; j++) {
                 matrix.get(i).add(new Cell(i, j));
             }
+        }
+    }
+    public void  display(){
+        for (int i = 0; i < dimension; i++) {
+            List<Cell> cells = matrix.get(i);
+            for (Cell cell : cells) {
+                cell.displayCell();
+            }
+            System.out.println();
         }
     }
 
