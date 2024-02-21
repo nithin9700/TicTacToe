@@ -12,6 +12,10 @@ public class Cell {
         this.cellType = CellType.EMPTY;
         this.player = null;
     }
+    public void undoCell(){
+        setCellType(CellType.EMPTY);
+        setPlayer(null);
+    }
     public void displayCell(){
         if(player == null){
             System.out.print("| |");
