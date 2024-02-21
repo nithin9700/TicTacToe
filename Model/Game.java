@@ -187,10 +187,6 @@ public class Game {
             this.makeMove = makeMove;
             return this;
         }
-
-
-
-
     }
     public Board undoStep(){
         Cell cell = makeMove.get(makeMove.size()- 1).getCell();
