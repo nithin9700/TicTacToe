@@ -3,17 +3,17 @@ package Controller;
 import Model.*;
 import service.WinningStrategy;
 
-import java.util.*;
+import java.util.List;
+
 
 public class GameController {
-    Game game;
-
+    private Game game;
     public Game createGame(int dimension, List<Player> playerList, WinningStrategy winningStrategy){
-        return null;
+        return Game.builder().setPlayerList(playerList).setDimension(dimension).build();
     }
 
     public void displayGame(Game game){
-
+        game.getCurrentBoard().display();
     }
 
     public Player getWinner(Game game){
@@ -21,7 +21,7 @@ public class GameController {
     }
 
     public GAMESTATUS getGameStatus(Game game){
-        return null;
+        return game.getGameStatus();
     }
 
     public Player checkWinner(Game game, Move lastMovePlayed){
@@ -33,10 +33,10 @@ public class GameController {
     }
 
     public Board undo(Game game){
-        return null;
+        return game.undoStep();
     }
     public void replayGame(Game game){
-
+        game.replayGame();
     }
 
 }
