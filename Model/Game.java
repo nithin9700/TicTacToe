@@ -94,8 +94,6 @@ public class Game {
         return new Builder();
     }
 
-
-
     public static class Builder{
         private int dimension;
         private Player currentPlayer;
@@ -151,7 +149,7 @@ public class Game {
 
         private void validateBotCount(){
             int botCount = (int)playerList.stream().filter(player -> player.getPlayertype().equals(PlayerType.BOT)).count();
-            if(botCount > 1 || botCount < 0){
+            if(botCount > 1){
                 throw new InvalidPlayerException("at least player need to board size - 2 or ");
             }
         }
@@ -177,6 +175,7 @@ public class Game {
             validateNoOfPlayer();
         }
         public Game build(){
+            validate();
             return new Game(playerList, new Board(dimension), winningStrategy);
         }
 
@@ -192,7 +191,10 @@ public class Game {
 
     }
     public Board undoStep(){
-        return null;
+        Cell cell = makeMove.get(makeMove.size()- 1).getCell();
+        cell.undoCell();
+        boardList.remove(boardList.size() - 1);
+        return boardList.get(boardList.size() - 1);
     }
     public void replayGame() {
         for (Board board : boardList) {
