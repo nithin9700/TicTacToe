@@ -1,10 +1,6 @@
 package Model;
 
-import service.BotDifficultLevelStrategy;
-import service.BotDifficultLevelStrategyFactoryUI;
-import service.EasyBotDifficultLevelStrategy;
-
-import static service.BotDifficultLevelStrategyFactoryUI.pickStrategy;
+import static service.BotDifficultLevelStrategy.BotDifficultLevelStrategyFactoryUI.pickStrategy;
 
 public class Bot extends  Player{
     private final BotDifficultyLevel  botdifficultylevel;
