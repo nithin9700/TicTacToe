@@ -34,11 +34,14 @@ public class GameController {
         return player.makeMove(game.getCurrentBoard());
     }
 
-    public Board undo(Game game){
+    public Board Undo(Game game){
         return game.undoStep();
     }
-    public void replayGame(Game game){
-        game.replayGame();
+    public void replayGame(Game game, List<Board> boards){
+
+        for (Board board : boards) {
+            board.display();
+        }
     }
 
 }

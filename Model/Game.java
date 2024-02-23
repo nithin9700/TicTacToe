@@ -199,12 +199,10 @@ public class Game {
     public Board undoStep(){
         Cell cell = makeMove.get(makeMove.size()- 1).getCell();
         cell.undoCell();
-        boardList.remove(boardList.size() - 1);
-        return boardList.get(boardList.size() - 1);
+        makeMove.remove(makeMove.size()- 1);
+        boardList.remove(boardList.size() -1);
+        return this.boardList.get(boardList.size() -1);
     }
-    public void replayGame() {
-        for (Board board : boardList) {
-            System.out.println(board);
-        }
-    }
+
 }
+//1081

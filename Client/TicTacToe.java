@@ -40,6 +40,7 @@ public class TicTacToe {
         Collections.shuffle(playerList);
         Game game = new GameController().createGame(dimension,playerList, WinningStrategyName.OrderOneWinningStrategy);
         int playerIndex = -1;
+        boardList.add(game.getCurrentBoard());
         while (game.getGameStatus().equals(GameStatus.IN_PROGRESS)){
             playerIndex++;
             playerIndex = playerIndex % playerList.size();
@@ -57,15 +58,20 @@ public class TicTacToe {
             }
             System.out.println("Current Board Status");
             gameController.displayGame(game);
-            //System.out.println(1);
+//            System.out.println("Do you want Undo the game? Y or N");
+//            String undo = sc.next();
+            //if(undo.equalsIgnoreCase("y")) gameController.Undo(game);
             if(boardList.size() == (dimension * dimension)){
                 game.setGameStatus(GameStatus.DRAW);
                 System.out.println("Your Match is DRAW");
             }
         }
 
-        System.out.println("Do you want to replay? ");
-
+        System.out.println("Do you want to replay? Y or N");
+        String replay = sc.next();
+        if(replay.equalsIgnoreCase("y")) {
+            gameController.replayGame(game,boardList);
+        }
     }
 }
 /*
