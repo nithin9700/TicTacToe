@@ -6,7 +6,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import Exception.*;
-import service.WinningStrategy;
+import service.WinningStrategy.WinningStrategy;
+import service.WinningStrategy.WinningStrategyFactory;
 
 public class Game {
     private Model.GameStatus GameStatus;
@@ -27,6 +28,7 @@ public class Game {
         this.GameStatus = Model.GameStatus.IN_PROGRESS;
         this.boardList = new ArrayList<>();
     }
+
     public Model.GameStatus getGameStatus() {
         return GameStatus;
     }
@@ -146,6 +148,11 @@ public class Game {
             this.winningStrategy = winningStrategy;
             return this;
         }
+        private void validateDimension(){
+            if(2 > dimension && dimension < 10) {
+                throw new InvalidSizeException("Please set the size between 3 to 10");
+            }
+        }
 
         private void validateBotCount(){
             int botCount = (int)playerList.stream().filter(player -> player.getPlayertype().equals(PlayerType.BOT)).count();
@@ -170,6 +177,7 @@ public class Game {
             }
         }
         private void validate(){
+            validateDimension();
             validateBotCount();
             validateSymbol();
             validateNoOfPlayer();

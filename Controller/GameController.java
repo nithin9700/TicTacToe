@@ -1,23 +1,25 @@
 package Controller;
 
 import Model.*;
-import service.WinningStrategy;
+import service.WinningStrategy.WinningStrategy;
+import service.WinningStrategy.WinningStrategyFactory;
+import service.WinningStrategy.WinningStrategyName;
 
 import java.util.List;
 
 
 public class GameController {
     private Game game;
-    public Game createGame(int dimension, List<Player> playerList, WinningStrategy winningStrategy){
-        return Game.builder().setPlayerList(playerList).setDimension(dimension).build();
+    public Game createGame(int dimension, List<Player> playerList, WinningStrategyName winningStrategyName){
+        return Game.builder()
+                .setPlayerList(playerList)
+                .setDimension(dimension)
+                .setWinningStrategy(WinningStrategyFactory.getConstructor(WinningStrategyName.OrderOneWinningStrategy, dimension))
+                .build();
     }
 
     public void displayGame(Game game){
         game.getCurrentBoard().display();
-    }
-
-    public Player getWinner(Game game){
-        return null;
     }
 
     public GameStatus getGameStatus(Game game){
@@ -25,11 +27,11 @@ public class GameController {
     }
 
     public Player checkWinner(Game game, Move lastMovePlayed){
-        return null;
+        return game.getWinningStrategy().winningStrategy(lastMovePlayed);
     }
 
     public Move executeMove(Game game, Player player){
-        return null;
+        return player.makeMove(game.getCurrentBoard());
     }
 
     public Board undo(Game game){
