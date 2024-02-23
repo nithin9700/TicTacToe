@@ -21,9 +21,16 @@ public class Player {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the row:");
         int row = sc.nextInt() - 1;
+        while (row >= board.getDimension()){
+            System.out.println("The value is greater the board size, Please enter the lesser value");
+            row = sc.nextInt() - 1;
+        }
         System.out.println("Enter the Col:");
         int col = sc.nextInt() - 1;
-
+        while (col >= board.getDimension()){
+            System.out.println("The value is greater the board size, Please enter the lesser value");
+            col = sc.nextInt() - 1;
+        }
         if(board.getMatrix().get(row).get(col).getCellType().equals(CellType.FILLED)){
             throw  new InvalidMoveException("Invalid move");
         }
