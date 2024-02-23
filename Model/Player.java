@@ -20,15 +20,15 @@ public class Player {
     public Move makeMove(Board board){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the row:");
-        int row = sc.nextInt();
-        System.out.println("Enter the Col");
-        int col = sc.nextInt();
+        int row = sc.nextInt() - 1;
+        System.out.println("Enter the Col:");
+        int col = sc.nextInt() - 1;
 
-        if(board.getMatrix().get(row).get(col).equals(CellType.FILLED)){
-            throw new InvalidMoveException("you cannot place you symbol which is filled by other player");
+        if(board.getMatrix().get(row).get(col).getCellType().equals(CellType.FILLED)){
+            throw  new InvalidMoveException("Invalid move");
         }
 
-        if(row < 0 && row >= board.getDimension() || col < 0 && col >= board.getDimension()){
+        if(row < 0 || row >= board.getDimension() || col < 0 || col >= board.getDimension()){
             throw new InvalidMoveException("You have move out of the board");
         }
 
