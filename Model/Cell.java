@@ -6,6 +6,14 @@ public class Cell {
     private CellType cellType;
     private Player player;
 
+    public Cell(Cell cell){
+        this.i = cell.i;
+        this.j = cell.j;
+        this.cellType = cell.cellType;
+        this.player = cell.player;
+    }
+
+
     public Cell(int i, int j){
         this.i = i;
         this.j = j;
@@ -24,8 +32,6 @@ public class Cell {
             System.out.print("|" + player.getSymbol()+"|");
         }
     }
-
-
 
     public int getI() {
         return i;
@@ -57,5 +63,12 @@ public class Cell {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public Cell clone(){
+        Cell cell1 = new Cell(i, j);
+        cell1.setCellType(this.cellType);
+        cell1.setPlayer(this.player);
+        return cell1;
     }
 }

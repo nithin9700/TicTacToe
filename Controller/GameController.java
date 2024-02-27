@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GameController {
     private Game game;
-    public Game createGame(int dimension, List<Player> playerList, WinningStrategyName winningStrategyName){
+    public Game createGame(int dimension, List<Player> playerList){
         return Game.builder()
                 .setPlayerList(playerList)
                 .setDimension(dimension)
@@ -37,11 +37,8 @@ public class GameController {
     public Board Undo(Game game){
         return game.undoStep();
     }
-    public void replayGame(Game game, List<Board> boards){
-
-        for (Board board : boards) {
-            board.display();
-        }
+    public void replayGame(Game game){
+        game.replayGame();
     }
 
 }

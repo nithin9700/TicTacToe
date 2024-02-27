@@ -2,8 +2,11 @@ package Client;
 
 import Controller.GameController;
 import Model.*;
+import service.WinningStrategy.WinningStrategy;
+import service.WinningStrategy.WinningStrategyFactory;
 import service.WinningStrategy.WinningStrategyName;
 
+import javax.xml.transform.Source;
 import java.util.*;
 
 public class TicTacToe {
@@ -38,17 +41,34 @@ public class TicTacToe {
             id++;
         }
         Collections.shuffle(playerList);
-        Game game = new GameController().createGame(dimension,playerList, WinningStrategyName.OrderOneWinningStrategy);
+        Game game = new GameController().createGame(dimension,playerList);
         int playerIndex = -1;
         boardList.add(game.getCurrentBoard());
+        game.setCurrentBoard(game.clone());
         while (game.getGameStatus().equals(GameStatus.IN_PROGRESS)){
             playerIndex++;
             playerIndex = playerIndex % playerList.size();
             System.out.println(playerList.get(playerIndex).getName());
             Move playedMove = gameController.executeMove(game, playerList.get(playerIndex));
+            Player player = playedMove.getPlayer();
+            System.out.println("Current Board Status");
+            gameController.displayGame(game);
             moveList.add(playedMove);
             game.setMakeMove(moveList);
             boardList.add(game.getCurrentBoard());
+            game.setCurrentBoard(game.clone());
+
+            if(player.getPlayertype() == PlayerType.HUMAN) {
+                System.out.println("Do you want to undo the step? Y or N");
+                String undoInput = sc.next();
+                if (undoInput.equalsIgnoreCase("Y")) {
+                    game.setBoardList(boardList);
+                    game.setCurrentBoard(game.undoStep());
+                    System.out.println("Current Board Status");
+                    gameController.displayGame(game);
+                    boardList = new ArrayList<>(game.getBoardList());;
+                }
+            }
             Player winner = gameController.checkWinner(game, playedMove);
             if(winner != null){
                 System.out.println("Winner is: " + winner.getName());
@@ -56,26 +76,18 @@ public class TicTacToe {
                 gameController.displayGame(game);
                 break;
             }
-            System.out.println("Current Board Status");
-            gameController.displayGame(game);
-//            System.out.println("Do you want Undo the game? Y or N");
-//            String undo = sc.next();
-            //if(undo.equalsIgnoreCase("y")) gameController.Undo(game);
-            if(boardList.size() == (dimension * dimension)){
+
+            if(moveList.size() == (dimension * dimension)){
                 game.setGameStatus(GameStatus.DRAW);
                 System.out.println("Your Match is DRAW");
             }
         }
-
+        game.setBoardList(boardList);
         System.out.println("Do you want to replay? Y or N");
         String replay = sc.next();
         if(replay.equalsIgnoreCase("y")) {
-            gameController.replayGame(game,boardList);
+            gameController.replayGame(game);
         }
+
     }
 }
-/*
-|$||$||a|
-|a||a||$|
-|$|| ||a|
- */

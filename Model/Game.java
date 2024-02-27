@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import Exception.*;
 import service.WinningStrategy.WinningStrategy;
 import service.WinningStrategy.WinningStrategyFactory;
+import service.WinningStrategy.WinningStrategyName;
 
 public class Game {
     private Model.GameStatus GameStatus;
@@ -197,11 +198,39 @@ public class Game {
         }
     }
     public Board undoStep(){
+        if(boardList.size() > 2){
+            for (int i = 1; i <=2; i++) {
+                Cell cell = makeMove.get(makeMove.size()- 1).getCell();
+                WinningStrategy winningStrategy1 = WinningStrategyFactory.getConstructor(WinningStrategyName.OrderOneWinningStrategy, dimension);
+                winningStrategy1.removeSymbolUndoStep(cell.getI(), cell.getJ(), cell.getPlayer().getSymbol());
+                cell.undoCell();
+                makeMove.remove(makeMove.size()-1);
+            }
+            return this.boardList.get(boardList.size() - 2);
+        }
         Cell cell = makeMove.get(makeMove.size()- 1).getCell();
+        WinningStrategy winningStrategy1 = WinningStrategyFactory.getConstructor(WinningStrategyName.OrderOneWinningStrategy, dimension);
+        winningStrategy1.removeSymbolUndoStep(cell.getI(), cell.getJ(), cell.getPlayer().getSymbol());
         cell.undoCell();
-        makeMove.remove(makeMove.size()- 1);
-        boardList.remove(boardList.size() -1);
-        return this.boardList.get(boardList.size() -1);
+        makeMove.remove(makeMove.size() - 1);
+        return this.boardList.get(boardList.size() - 1);
+    }
+    public void replayGame(){
+        for (int i = 0; i < boardList.size(); i++) {
+            Board board = boardList.get(i);
+            board.display();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("---------------------");
+        }
+    }
+
+    public Board clone() {
+        Board cloneBoard = currentBoard.clone();
+        return cloneBoard;
     }
 
 }
