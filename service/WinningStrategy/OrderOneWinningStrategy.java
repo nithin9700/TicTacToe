@@ -69,4 +69,24 @@ public class OrderOneWinningStrategy implements WinningStrategy{
         map.put(symbol, map.getOrDefault(symbol, 0) + 1);
     }
 
+    public void removeSymbolUndoStep(int i, int j, char symbol){
+        if(i < rowList.size()) removeSymbol(rowList.get(i), symbol);
+        if(j < colList.size()) removeSymbol(colList.get(j), symbol);
+        if(i == j && i + j != dimension -1){
+            removeSymbol(leftDiagonal, symbol);
+        }
+        else if(i + j == dimension - 1 && i != j){
+            removeSymbol(rightDiagonal, symbol);
+        }
+        else if(i + j == dimension - 1 && i == j){
+            removeSymbol(leftDiagonal, symbol);
+            removeSymbol(rightDiagonal, symbol);
+        }
+
+    }
+    private void removeSymbol(HashMap<Character, Integer>map, char symbol){
+        if(map.size() > 1){
+            map.remove(symbol, map.get(symbol) - 1);
+        }
+    }
 }
